@@ -6,11 +6,29 @@ const getAllBreeds = () => {
   return fetch('https://dog.ceo/api/breeds/list/all')
     .then(response => response.json());
 }
-
+const allBreedsItems = ({breeds}) => {
+  breeds.map(
+    (breed, index) => <li key={index}>{breed}</li>
+  );
+}
 class App extends Component {
-  componentDidMount() {
-    getAllBreeds().then(({message}) => console.log(message))
+  constructor(props) {
+    super(props);
+    this.state = {
+      breeds: []
+    }
   }
+  componentDidMount() {
+    getAllBreeds().then(
+      ({message}) => {
+        let arr = [];
+        Object.keys(message).map(breed => arr.push(breed))
+        this.setState({breeds: arr})
+        console.log(this.state)
+      }
+    )
+  }
+  
   render() {
     return (
       <div className="App">
@@ -19,6 +37,9 @@ class App extends Component {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <ol>
+          {allBreedsItems(this.state.breeds)}
+        </ol>
       </header>
     </div>
     )
