@@ -11,16 +11,20 @@ const Row = ({groupName, breedCount, url}) => (
         </td>
     </tr>  
 )
+const testArray = [];
+for(let i = 0; i < 5; i++) {
+    testArray.push({name: `Dog breed group ${i+1}`});
+}
 export default () => (
     <Table>
         <thead>
-            <th>Breed group</th>
-            <th colSpan="2">Number of breeds</th>
+            <tr>
+                <th>Breed group</th>
+                <th colSpan="2">Number of breeds</th>
+            </tr>
         </thead>
         <tbody>
-            <Row groupName="Dog breed group 1" breedCount="0" url="/1"/>
-            <Row groupName="Dog breed group 2" breedCount="12" url="/2"/>
-            <Row groupName="Dog breed group 3" breedCount="2" url="/3"/>
+            {testArray.map((value, index) => <Row key={index} groupName={value.name} breedCount="0" url="/1"/>)}
         </tbody>
     </Table>
 );

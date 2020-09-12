@@ -10,7 +10,6 @@ class AllBreedsList extends Component {
   }
   componentDidMount() {
     getAllBreeds().then(({ message }) => {
-      console.log(message);
       let arrOfObjets = [];
       Object.keys(message).map((breed) =>
         arrOfObjets.push({
@@ -19,7 +18,6 @@ class AllBreedsList extends Component {
         })
       );
       this.setState({ breeds: arrOfObjets });
-      console.log(this.state);
     });
   }
 
