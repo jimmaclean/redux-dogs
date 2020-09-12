@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 const getAllBreeds = () => {
   return fetch('https://dog.ceo/api/breeds/list/all')
     .then(response => response.json());
 }
-const allBreedsItems = ({breeds}) => {
-  breeds.map(
-    (breed, index) => <li key={index}>{breed}</li>
-  );
-}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,9 +16,17 @@ class App extends Component {
   componentDidMount() {
     getAllBreeds().then(
       ({message}) => {
-        let arr = [];
-        Object.keys(message).map(breed => arr.push(breed))
-        this.setState({breeds: arr})
+        console.log(message)
+        let arrOfObjets = [];
+        Object.keys(message).map(
+          breed => arrOfObjets.push(
+            {
+              name: breed, 
+              subBreeds: message[breed] 
+            }
+          )
+        )
+        this.setState({breeds: arrOfObjets})
         console.log(this.state)
       }
     )
@@ -31,17 +34,25 @@ class App extends Component {
   
   render() {
     return (
-      <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <ol>
-          {allBreedsItems(this.state.breeds)}
-        </ol>
-      </header>
-    </div>
+      <ol>
+        {this.state.breeds.map((breed, index) => {
+          if (breed.subBreeds.length > 0 ) {
+            return (
+            <React.Fragment key={index}>
+              <li>{breed.name}</li>
+              <ol>
+                {breed.subBreeds.map(
+                  (subBreed, index) => <li key={index}>{subBreed}</li>
+                )}
+              </ol>
+            </React.Fragment>
+            )
+          } else {
+            return <li key={index}>{breed.name}</li>
+          }
+        })
+        }
+      </ol>
     )
 
   }
