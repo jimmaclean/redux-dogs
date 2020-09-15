@@ -4,6 +4,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import {store, showAll} from './store';
+
+store.subscribe(() => console.log(store.getState()));
+
+store.dispatch(showAll());
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
