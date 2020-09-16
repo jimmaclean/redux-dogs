@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {fetchAllBreeds} from '../store';
 
 const Table = (props) => <table {...props}>{props.children}</table>
 
@@ -15,16 +17,31 @@ const testArray = [];
 for(let i = 0; i < 5; i++) {
     testArray.push({name: `Dog breed group ${i+1}`});
 }
-export default () => (
-    <Table>
-        <thead>
-            <tr>
-                <th>Breed group</th>
-                <th colSpan="2">Number of breeds</th>
-            </tr>
-        </thead>
-        <tbody>
-            {testArray.map((value, index) => <Row key={index} groupName={value.name} breedCount="0" url="/1"/>)}
-        </tbody>
-    </Table>
-);
+class AllBreedsTable extends Component {
+    constructor() {
+        super();
+      }
+    componentDidMount() {
+        this.props.fetchAllBreeds()
+    }
+    render() {
+        return (
+            <Table>
+                <thead>
+                    <tr>
+                        <th>Breed group</th>
+                        <th colSpan="2">Number of breeds</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.props.allBreedGroups.map((value, index) => <Row key={index} groupName={value.name} breedCount={value.subBreeds.length} url="/1"/>)}
+                </tbody>
+            </Table>
+        );
+    }
+}
+
+export default connect(
+    (state) => ({allBreedGroups: state.allBreedGroups}),
+    {fetchAllBreeds}
+)(AllBreedsTable)
