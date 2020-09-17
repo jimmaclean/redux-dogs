@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker';
 
 import {store, showAll, fetchAllBreeds} from './store';
 
-// store.subscribe(() => console.log(store.getState()));
+store.subscribe(() => console.log(store.getState()));
 
 // store.dispatch(showAll());
 ReactDOM.render(

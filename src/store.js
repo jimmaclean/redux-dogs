@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, bindActionCreators } from 'redux';
 import thunk from 'redux-thunk';
-import { getAllBreeds, getAllBreedGroups } from "./lib/dogsApi";
+import { getImagesForBreed, getAllBreedGroups } from "./lib/dogsApi";
 
 const initialState = {
   allBreedGroups: [{
@@ -9,7 +9,8 @@ const initialState = {
       'fluffy',
       'small',
       'loud'
-    ]
+    ],
+    images: []
   }]
 };
 
@@ -19,35 +20,41 @@ const transformData = (message) => {
     arrOfObjets.push({
       name: breed,
       subBreeds: message[breed],
+      images: []
     })
   );
   return arrOfObjets ;
 };
 
 
-const SHOW_ALL = "SHOW_ALL";
 const LOAD_ALL = "LOAD_ALL";
+const LOAD_IMAGES_FOR_BREED = "LOAD_BREED_IMAGES";
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SHOW_ALL:
-      return initialState();
     case LOAD_ALL:
       return {...state, allBreedGroups: action.payload}
+    case LOAD_IMAGES_FOR_BREED:
+      return {...state, allBreedGroups: state.allBreedGroups.map(
+        (breedGroup) => (
+          breedGroup.name === action.payload.breed
+          ? {...breedGroup, images: action.payload.images}
+          : breedGroup
+        )
+      )}
     default:
       return state
   }
 
 };
 // Action creators
-export const showAll = () => {
-  return {
-    type: SHOW_ALL,
-  };
-};
 export const loadAll = (breeds) => (
   {type: LOAD_ALL, payload: breeds}
 )
+
+export const loadImagesForBreed = (breed, imageArray) => {
+    return {type: LOAD_IMAGES_FOR_BREED, payload: {images: imageArray, breed: breed}}
+};
 
 export const fetchAllBreeds = () => {
   return (dispatch) => {
@@ -58,6 +65,14 @@ export const fetchAllBreeds = () => {
           )
         )
       );
+  }
+};
+
+export const fetchImagesForBreed = (breed) => {
+  return (dispatch) => {
+    getImagesForBreed(breed)
+      .then(json => {
+        dispatch(loadImagesForBreed(breed, json.message))});
   }
 };
 

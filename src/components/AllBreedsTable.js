@@ -1,22 +1,20 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchAllBreeds} from '../store';
+import {fetchAllBreeds, fetchImagesForBreed} from '../store';
 
 const Table = (props) => <table {...props}>{props.children}</table>
 
-const Row = ({groupName, breedCount, url}) => (
+const Row = ({groupName, breedCount, onClick}) => (
     <tr>
         <td>{groupName}</td>
         <td>{breedCount}</td>
         <td>
-            <a href={url}>view</a>
+            <a href={`/${groupName}`}>view</a>
+            <button onClick={()=> onClick(groupName)}>Load {groupName} images</button>
         </td>
     </tr>  
 )
-const testArray = [];
-for(let i = 0; i < 5; i++) {
-    testArray.push({name: `Dog breed group ${i+1}`});
-}
+
 class AllBreedsTable extends Component {
     constructor() {
         super();
@@ -24,6 +22,10 @@ class AllBreedsTable extends Component {
     componentDidMount() {
         this.props.fetchAllBreeds()
     }
+    handelClick = (breed) => {
+        this.props.fetchImagesForBreed(breed)
+    }
+    
     render() {
         return (
             <Table>
@@ -34,7 +36,7 @@ class AllBreedsTable extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.props.allBreedGroups.map((value, index) => <Row key={index} groupName={value.name} breedCount={value.subBreeds.length} url="/1"/>)}
+                    {this.props.allBreedGroups.map((value, index) => <Row onClick={this.props.fetchImagesForBreed} key={index} groupName={value.name} breedCount={value.subBreeds.length} url="/1"/>)}
                 </tbody>
             </Table>
         );
@@ -43,5 +45,5 @@ class AllBreedsTable extends Component {
 
 export default connect(
     (state) => ({allBreedGroups: state.allBreedGroups}),
-    {fetchAllBreeds}
+    {fetchAllBreeds, fetchImagesForBreed}
 )(AllBreedsTable)
