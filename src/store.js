@@ -72,6 +72,7 @@ export const fetchAllBreeds = () => {
 };
 
 export const fetchImagesForBreed = (breed) => {
+  console.log('fetch')
   return (dispatch) => {
     getImagesForBreed(breed)
       .then(json => {

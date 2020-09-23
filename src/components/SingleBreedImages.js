@@ -33,8 +33,8 @@ class SingleBreedImages extends Component {
     // }
     
     render() {
-        if (this.props.breed) {
-            console.log(this.props.breed.name)
+        if (this.props.breed && this.props.breed.images.length === 0 ) {
+            this.props.fetchImagesForBreed(this.props.breed.name)
         }
         return (
             <div>
