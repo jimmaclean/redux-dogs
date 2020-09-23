@@ -27,7 +27,6 @@ const transformData = (message) => {
 };
 
 export const getVisibleBreed = (allBreeds, visible) => {
-  console.log(typeof allBreeds)
   return allBreeds.filter(b => b.name === visible)[0]
 };
 

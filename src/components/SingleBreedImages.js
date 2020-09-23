@@ -26,23 +26,26 @@ class SingleBreedImages extends Component {
         super();
       }
     componentDidMount() {
-        // this.props.fetchAllBreeds()
-        console.log(this.props.allBreedGroups)
-        console.log(getVisibleBreed(this.props.allBreedGroups, this.props.breedToShow))
+
     }
     // handelClick = (breed) => {
     //     this.props.fetchImagesForBreed(breed)
     // }
     
     render() {
-        
+        if (this.props.breed) {
+            console.log(this.props.breed.name)
+        }
         return (
-            // <Gallery imageSrcArray={this.props.testImgArr} />
-            <h3>Hi</h3>
+            <div>
+                <h3>Hi {this.props.breedToShow}</h3>
+                {this.props.breed && <Gallery imageSrcArray={this.props.breed.images} />}
+            </div>
+
         );
     }
 }
 
-export default connect((state, ownProps) => ({ allBreedGroups: state.allBreedGroups }), {
+export default connect((state, ownProps) => ({ breed: getVisibleBreed(state.allBreedGroups, ownProps.breedToShow) }), {
   fetchImagesForBreed,
 })(SingleBreedImages);

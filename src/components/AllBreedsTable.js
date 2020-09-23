@@ -21,7 +21,7 @@ class AllBreedsTable extends Component {
         super();
       }
     componentDidMount() {
-        this.props.fetchAllBreeds()
+        // this.props.fetchAllBreeds()
     }
     handelClick = (breed) => {
         this.props.fetchImagesForBreed(breed)
@@ -46,5 +46,5 @@ class AllBreedsTable extends Component {
 
 export default connect(
     (state) => ({allBreedGroups: state.allBreedGroups}),
-    {fetchAllBreeds, fetchImagesForBreed}
+    {fetchImagesForBreed}
 )(AllBreedsTable)
