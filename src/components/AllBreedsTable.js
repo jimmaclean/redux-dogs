@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
 import {fetchAllBreeds, fetchImagesForBreed} from '../store';
 
 const Table = (props) => <table {...props}>{props.children}</table>
@@ -9,7 +10,7 @@ const Row = ({groupName, breedCount, onClick}) => (
         <td>{groupName}</td>
         <td>{breedCount}</td>
         <td>
-            <a href={`/${groupName}`}>view</a>
+            <Link to={`/${groupName}`}>view</Link>
             <button onClick={()=> onClick(groupName)}>Load {groupName} images</button>
         </td>
     </tr>  

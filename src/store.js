@@ -26,6 +26,10 @@ const transformData = (message) => {
   return arrOfObjets ;
 };
 
+export const getVisibleBreed = (allBreeds, visible) => {
+  console.log(typeof allBreeds)
+  return allBreeds.filter(b => b.name === visible)[0]
+};
 
 const LOAD_ALL = "LOAD_ALL";
 const LOAD_IMAGES_FOR_BREED = "LOAD_BREED_IMAGES";
