@@ -25,17 +25,17 @@ class SingleBreedImages extends Component {
     constructor() {
         super();
       }
-    componentDidMount() {
-
+    componentDidUpdate() {
+        if (this.props.breed && this.props.breed.images.length === 0 ) {
+            this.props.fetchImagesForBreed(this.props.breed.name)
+        }
     }
     // handelClick = (breed) => {
     //     this.props.fetchImagesForBreed(breed)
     // }
     
     render() {
-        if (this.props.breed && this.props.breed.images.length === 0 ) {
-            this.props.fetchImagesForBreed(this.props.breed.name)
-        }
+
         return (
             <div>
                 <h3>Hi {this.props.breedToShow}</h3>
