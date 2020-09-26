@@ -10,9 +10,8 @@ export const getAllBreedGroups = () => {
   );
 };
 
-
 export const getImagesForBreed = (breed, number = 3) => {
-  return fetch(`https://dog.ceo/api/breed/${breed}/images/random/${number}`).then((response) =>
-    response.json()
-  );
+  return fetch(
+    `https://dog.ceo/api/breed/${breed}/images/random/${number}`
+  ).then((response) => response.json());
 };
