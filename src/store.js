@@ -3,12 +3,13 @@ import thunk from "redux-thunk";
 import { getImagesForBreed, getAllBreedGroups } from "./lib/dogsApi";
 
 const initialState = {
+  isLoaded: false,
   allBreedGroups: [
-    {
-      name: "doggy",
-      subBreeds: ["fluffy", "small", "loud"],
-      images: [],
-    },
+    // {
+    //   name: "doggy",
+    //   subBreeds: ["fluffy", "small", "loud"],
+    //   images: [],
+    // },
   ],
 };
 
@@ -34,7 +35,7 @@ const LOAD_IMAGES_FOR_BREED = "LOAD_BREED_IMAGES";
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ALL:
-      return { ...state, allBreedGroups: action.payload };
+      return { ...state, allBreedGroups: action.payload, isLoaded: true };
     case LOAD_IMAGES_FOR_BREED:
       return {
         ...state,

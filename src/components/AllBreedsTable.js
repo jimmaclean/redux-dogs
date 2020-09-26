@@ -5,7 +5,7 @@ import { fetchAllBreeds, fetchImagesForBreed } from "../store";
 
 const Table = (props) => <table {...props}>{props.children}</table>;
 
-const Row = ({ groupName, breedCount, onClick }) => (
+const Row = ({ groupName, breedCount }) => (
   <tr>
     <td>{groupName}</td>
     <td>{breedCount}</td>

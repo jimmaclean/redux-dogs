@@ -12,23 +12,31 @@ class App extends Component {
   }
   render() {
     return (
-      <Router>
-        <div>
-          <Switch>
-            <Route
-              path="/breed/:breed?"
-              render={({ match }) => (
-                <SingleBreedImages breedToShow={match.params.breed} />
-              )}
-            />
-            <Route path="/">
-              <AllBreedsTable />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+      <>
+        {this.props.isLoaded ? (
+          <Router>
+            <div>
+              <Switch>
+                <Route
+                  path="/breed/:breed?"
+                  render={({ match }) => (
+                    <SingleBreedImages breedToShow={match.params.breed} />
+                  )}
+                />
+                <Route path="/">
+                  <AllBreedsTable />
+                </Route>
+              </Switch>
+            </div>
+          </Router>
+        ) : (
+          <h3>App Loading</h3>
+        )}
+      </>
     );
   }
 }
 
-export default connect(null, { fetchAllBreeds })(App);
+export default connect((state) => ({ isLoaded: state.isLoaded }), {
+  fetchAllBreeds,
+})(App);
