@@ -5,13 +5,18 @@ import { getVisibleBreed, fetchImagesForBreed } from "../store";
 
 const MAX_IMGS = 3;
 
-const Image = ({ src }) => <img src={src}></img>;
+const Image = ({ src }) => (
+  <li className="gallery-item">
+    <img src={src}></img>
+  </li>
+);
+
 const Gallery = ({ imageSrcArray }) => (
-  <div>
+  <ol className="gallery-list">
     {imageSrcArray.slice(0, MAX_IMGS).map((imgSrc, index) => (
       <Image src={imgSrc} key={index} />
     ))}
-  </div>
+  </ol>
 );
 const BackLink = () => <Link to="/">{"<- Back"}</Link>;
 
@@ -20,9 +25,7 @@ class SingleBreedImages extends Component {
     super();
   }
   componentDidMount() {
-    if (
-      !this.props.breed || this.props.breed.images.length === 0
-    ) {
+    if (!this.props.breed || this.props.breed.images.length === 0) {
       this.props.fetchImagesForBreed(this.props.breedToShow);
     }
   }

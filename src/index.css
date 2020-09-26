@@ -9,3 +9,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.gallery-list {
+  list-style: none;
+  display: flex;
+  flex-flow: row nowrap;
+  height: 30vw;
+  padding-left: 0;
+}
+.gallery-item {
+  flex: 1 1 33%;
+}
+img {
+  width: 100%;
+  height: auto;
+}
