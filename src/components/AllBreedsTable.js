@@ -28,13 +28,13 @@ class AllBreedsTable extends Component {
             <th onClick={() => this.props.sortAllBy("name")}>
               Breed group
               {this.props.sortedBy.col === "name" && (
-                <SortIcon isDown={this.props.sortedBy.isAscending} />
+                this.props.sortedBy.isAscending ? " [A⬊z]" : " [Z⬊a]"
               )}
             </th>
             <th onClick={() => this.props.sortAllBy("breedCount")} colSpan="2">
               Number of breeds
               {this.props.sortedBy.col === "breedCount" && (
-                <SortIcon isDown={!this.props.sortedBy.isAscending} />
+                  this.props.sortedBy.isAscending ? " [0⬊9]" : " [9⬊0]"
               )}
             </th>
           </tr>
