@@ -4,10 +4,15 @@ import { getImagesForBreed, getAllBreedGroups } from "./lib/dogsApi";
 
 const initialState = {
   isLoaded: false,
+  sortedBy: {
+    col: 'name',
+    direction: 'asc',
+  },
   allBreedGroups: [
     // {
     //   name: "doggy",
     //   subBreeds: ["fluffy", "small", "loud"],
+    //   breedCount: 3,
     //   images: [],
     // },
   ],

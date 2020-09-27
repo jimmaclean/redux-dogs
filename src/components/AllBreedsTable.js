@@ -14,6 +14,7 @@ const Row = ({ groupName, breedCount }) => (
     </td>
   </tr>
 );
+const SortIcon = (direction) => (direction === "asc" ? "⇧" : "⇩");
 
 class AllBreedsTable extends Component {
   constructor() {
@@ -24,7 +25,12 @@ class AllBreedsTable extends Component {
       <Table>
         <thead>
           <tr>
-            <th onClick={() => this.props.sortAllBy("name")}>Breed group</th>
+            <th onClick={() => this.props.sortAllBy("name")}>
+              Breed group
+              {this.props.sortedBy.col === "name" && (
+                <SortIcon direction={this.props.sortedBy.direction} />
+              )}
+            </th>
             <th onClick={() => this.props.sortAllBy("breedCount")} colSpan="2">
               Number of breeds
             </th>
@@ -45,6 +51,12 @@ class AllBreedsTable extends Component {
   }
 }
 
-export default connect((state) => ({ allBreedGroups: state.allBreedGroups }), {
-  sortAllBy,
-})(AllBreedsTable);
+export default connect(
+  (state) => ({
+    allBreedGroups: state.allBreedGroups,
+    sortedBy: state.sortedBy,
+  }),
+  {
+    sortAllBy,
+  }
+)(AllBreedsTable);
