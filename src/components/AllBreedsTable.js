@@ -14,7 +14,7 @@ const Row = ({ groupName, breedCount }) => (
     </td>
   </tr>
 );
-const SortIcon = (direction) => (direction === "asc" ? "⇧" : "⇩");
+const SortIcon = ({isDown}) => (isDown ?  "⇩" : "⇧");
 
 class AllBreedsTable extends Component {
   constructor() {
@@ -28,11 +28,14 @@ class AllBreedsTable extends Component {
             <th onClick={() => this.props.sortAllBy("name")}>
               Breed group
               {this.props.sortedBy.col === "name" && (
-                <SortIcon direction={this.props.sortedBy.direction} />
+                <SortIcon isDown={this.props.sortedBy.isAscending} />
               )}
             </th>
             <th onClick={() => this.props.sortAllBy("breedCount")} colSpan="2">
               Number of breeds
+              {this.props.sortedBy.col === "breedCount" && (
+                <SortIcon isDown={!this.props.sortedBy.isAscending} />
+              )}
             </th>
           </tr>
         </thead>

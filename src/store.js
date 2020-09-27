@@ -5,8 +5,8 @@ import { getImagesForBreed, getAllBreedGroups } from "./lib/dogsApi";
 const initialState = {
   isLoaded: false,
   sortedBy: {
-    col: 'name',
-    direction: 'asc',
+    col: "name",
+    isAscending: true,
   },
   allBreedGroups: [
     // {
@@ -31,7 +31,7 @@ const transformData = (message) => {
   return arrOfObjets;
 };
 
-function compareValues(key, order = "asc") {
+function compareValues(key, isAscending = true) {
   return function innerSort(a, b) {
     if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
       // property doesn't exist on either object
@@ -47,7 +47,7 @@ function compareValues(key, order = "asc") {
     } else if (varA < varB) {
       comparison = -1;
     }
-    return order === "desc" ? comparison * -1 : comparison;
+    return isAscending ? comparison : comparison * -1;
   };
 }
 
@@ -73,11 +73,17 @@ const reducer = (state = initialState, action) => {
         ),
       };
     case SORT_ALL_BY:
+      let isAscending =
+        state.sortedBy.col === action.payload ? !state.sortedBy.isAscending : true;
       return {
         ...state,
         allBreedGroups: [...state.allBreedGroups].sort(
-          compareValues(action.payload)
+          compareValues(action.payload, isAscending)
         ),
+        sortedBy: {
+          col: action.payload,
+          isAscending: isAscending
+        }
       };
     default:
       return state;
