@@ -15,7 +15,6 @@ class App extends Component {
       <>
         {this.props.isLoaded ? (
           <Router>
-            <div>
               <Switch>
                 <Route
                   path="/breed/:breed?"
@@ -27,10 +26,9 @@ class App extends Component {
                   <AllBreedsTable />
                 </Route>
               </Switch>
-            </div>
           </Router>
         ) : (
-          <h3>App Loading</h3>
+          <h3>App Loading...</h3>
         )}
       </>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchAllBreeds, fetchImagesForBreed } from "../store";
+import { sortAllBy } from "../store";
 
 const Table = (props) => <table {...props}>{props.children}</table>;
 
@@ -19,20 +19,20 @@ class AllBreedsTable extends Component {
   constructor() {
     super();
   }
-
   render() {
     return (
       <Table>
         <thead>
           <tr>
-            <th>Breed group</th>
-            <th colSpan="2">Number of breeds</th>
+            <th onClick={() => this.props.sortAllBy("name")}>Breed group</th>
+            <th onClick={() => this.props.sortAllBy("breedCount")} colSpan="2">
+              Number of breeds
+            </th>
           </tr>
         </thead>
         <tbody>
           {this.props.allBreedGroups.map((value, index) => (
             <Row
-              onClick={this.props.fetchImagesForBreed}
               key={index}
               groupName={value.name}
               breedCount={value.subBreeds.length}
@@ -46,5 +46,5 @@ class AllBreedsTable extends Component {
 }
 
 export default connect((state) => ({ allBreedGroups: state.allBreedGroups }), {
-  fetchImagesForBreed,
+  sortAllBy,
 })(AllBreedsTable);

@@ -19,11 +19,32 @@ const transformData = (message) => {
     arrOfObjets.push({
       name: breed,
       subBreeds: message[breed],
+      breedCount: message[breed].length,
       images: [],
     })
   );
   return arrOfObjets;
 };
+
+function compareValues(key, order = "asc") {
+  return function innerSort(a, b) {
+    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+      // property doesn't exist on either object
+      return 0;
+    }
+
+    const varA = typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
+    const varB = typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
+
+    let comparison = 0;
+    if (varA > varB) {
+      comparison = 1;
+    } else if (varA < varB) {
+      comparison = -1;
+    }
+    return order === "desc" ? comparison * -1 : comparison;
+  };
+}
 
 export const getVisibleBreed = (allBreeds, visible) => {
   return allBreeds.filter((b) => b.name === visible)[0];
@@ -31,6 +52,7 @@ export const getVisibleBreed = (allBreeds, visible) => {
 
 const LOAD_ALL = "LOAD_ALL";
 const LOAD_IMAGES_FOR_BREED = "LOAD_BREED_IMAGES";
+const SORT_ALL_BY = "SORT_ALL_BY";
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -43,6 +65,13 @@ const reducer = (state = initialState, action) => {
           breedGroup.name === action.payload.breed
             ? { ...breedGroup, images: action.payload.images }
             : breedGroup
+        ),
+      };
+    case SORT_ALL_BY:
+      return {
+        ...state,
+        allBreedGroups: [...state.allBreedGroups].sort(
+          compareValues(action.payload)
         ),
       };
     default:
@@ -72,6 +101,13 @@ export const fetchImagesForBreed = (breed) => {
     getImagesForBreed(breed).then((json) => {
       dispatch(loadImagesForBreed(breed, json.message));
     });
+  };
+};
+
+export const sortAllBy = (sortBy) => {
+  return {
+    type: SORT_ALL_BY,
+    payload: sortBy,
   };
 };
 
