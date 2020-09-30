@@ -1,8 +1,5 @@
 module.exports = {
-  purge: {
-    enabled: true,
-    content: ["./src/**/*.js"],
-  },
+  purge: ["./src/**/*.js"],
   theme: {
     colors: {
       brown: "#773f0e",
@@ -18,7 +15,7 @@ module.exports = {
       lg: "20px",
       xl: "30px",
     },
-    extends: {
+    extend: {
       spacing: {
         '96': '24rem',
       }

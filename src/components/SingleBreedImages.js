@@ -9,7 +9,7 @@ const Image = ({ src }) => (
   <li className="w-full">
     <img
       src={src}
-      className="object-cover h-32 sm:h-48 md:h-64 lg:h-96 w-full"
+      className="object-cover h-32 sm:h-48 md:h-64 xl:h-96 w-full"
     ></img>
   </li>
 );
