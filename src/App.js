@@ -12,7 +12,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="container mx-auto">
+      <div className="container mx-auto px-2 pb-6 md:px-4">
         <h1 className="text-xl text-brown font-bold py-6">Doggy McDogface</h1>
         {this.props.isLoaded ? (
           <Router>

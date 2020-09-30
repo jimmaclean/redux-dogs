@@ -7,18 +7,28 @@ const MAX_IMGS = 3;
 
 const Image = ({ src }) => (
   <li className="w-full">
-    <img src={src} className="object-cover h-64 lg:h-96 w-full"></img>
+    <img
+      src={src}
+      className="object-cover h-32 sm:h-48 md:h-64 lg:h-96 w-full"
+    ></img>
   </li>
 );
 
 const Gallery = ({ imageSrcArray }) => (
-  <ol className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6 mb:mb-8">
+  <ol className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6 mb:mb-8">
     {imageSrcArray.slice(0, MAX_IMGS).map((imgSrc, index) => (
       <Image src={imgSrc} key={index} />
     ))}
   </ol>
 );
-const BackLink = () => <Link to="/" className="px-6 py-2 border border-brown text-brow no-underline inline-block mb-4">{"< Back"}</Link>;
+const BackLink = () => (
+  <Link
+    to="/"
+    className="px-6 py-2 border border-brown text-brow no-underline inline-block mb-4"
+  >
+    {"< Back"}
+  </Link>
+);
 
 class SingleBreedImages extends Component {
   componentDidMount() {
@@ -40,7 +50,7 @@ class SingleBreedImages extends Component {
           <h3>Loading...</h3>
         ) : (
           <>
-            <div className="md:flex items-baseline">
+            <div className="md:flex items-center">
               {this.props.breed.subBreeds.length > 0 && (
                 <div className="flex-grow mb-4">
                   <h4 className="inline-block mr-2">Sub brees:</h4>
@@ -56,7 +66,7 @@ class SingleBreedImages extends Component {
 
               <button
                 onClick={() => this.handelClick()}
-                className="px-6 py-2 bg-brown text-white mb-4"
+                className="px-6 py-2 flex-shrink-0 bg-brown text-white mb-4"
               >
                 Change pictures
               </button>
