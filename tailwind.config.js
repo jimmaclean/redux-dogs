@@ -1,5 +1,8 @@
 module.exports = {
-  purge: ["src/**/*.js"],
+  purge: {
+    enabled: true,
+    content: ["./src/**/*.js"],
+  },
   theme: {
     colors: {
       brown: "#773f0e",
