@@ -1,0 +1,9 @@
+@tailwind base;
+
+a {
+  @apply text-brown underline cursor-pointer;
+}
+
+@tailwind components;
+@tailwind utilities;
+
