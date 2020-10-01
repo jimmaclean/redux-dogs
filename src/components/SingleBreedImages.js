@@ -53,7 +53,7 @@ class SingleBreedImages extends Component {
             <div className="md:flex items-center">
               {this.props.breed.subBreeds.length > 0 && (
                 <div className="flex-grow mb-4">
-                  <h4 className="inline-block mr-2">Sub brees:</h4>
+                  <h4 className="inline-block mr-2">Sub breeds:</h4>
                   <ul className="inline-block">
                     {this.props.breed.subBreeds.map((subBreed, index) => (
                       <li className="text-brown inline-block mr-2" key={index}>
