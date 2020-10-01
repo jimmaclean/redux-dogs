@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, bindActionCreators } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { getImagesForBreed, getAllBreedGroups } from "./lib/dogsApi";
 

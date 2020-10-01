@@ -10,6 +10,7 @@ const Image = ({ src }) => (
     <img
       src={src}
       className="object-cover h-32 sm:h-48 md:h-64 xl:h-96 w-full"
+      alt="Dog"
     ></img>
   </li>
 );

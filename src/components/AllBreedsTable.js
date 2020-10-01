@@ -23,9 +23,6 @@ const getBodyCellsStyles = (lastRow) =>
     : "px-3 py-2 border-b border-solid border-grey font-normal text-black capitalize";
 
 class AllBreedsTable extends Component {
-  constructor() {
-    super();
-  }
   render() {
     return (
       <Table>
