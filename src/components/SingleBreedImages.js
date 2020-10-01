@@ -6,7 +6,7 @@ import { getVisibleBreed, fetchImagesForBreed } from "../store";
 const MAX_IMGS = 3;
 
 const Image = ({ src }) => (
-  <li className="w-full">
+  <li className="w-full border border-grey rounded">
     <img
       src={src}
       className="object-cover h-32 sm:h-48 md:h-64 xl:h-96 w-full"
